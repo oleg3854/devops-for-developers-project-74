@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./app:/app
+    # Это заставит Docker работать прямо в папке с твоим кодом и Makefile
+    working_dir: /app
