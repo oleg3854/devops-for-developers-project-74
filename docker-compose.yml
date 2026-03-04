@@ -1,7 +1,9 @@
 services:
   app:
-    build: .
-    volumes:
-      - ./app:/app
-    # Это заставит Docker работать прямо в папке с твоим кодом и Makefile
-    working_dir: /app
+    image: devopsoleg/devops-for-developers-project-74
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    # Добавь этот блок:
+    environment:
+      - NODE_ENV=development
