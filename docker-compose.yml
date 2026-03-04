@@ -1,4 +1,16 @@
 services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   app:
     image: devopsoleg/devops-for-developers-project-74
     build:
@@ -7,3 +19,6 @@ services:
     # Добавь этот блок:
     environment:
       - NODE_ENV=development
+    depends_on:
+      db:
+        condition: service_healthy # Ждем, пока БД будет готова к работе
